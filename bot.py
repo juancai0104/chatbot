@@ -3,10 +3,7 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
-from cleaner import clean_corpus
-from chatterbot.conversation import Statement
-
-CORPUS_FILE = "chat.txt"
+import codecs
 
 chatbot = ChatBot(
         "Chatpot",
@@ -15,22 +12,25 @@ chatbot = ChatBot(
         logic_adapters=[
         {
             'import_path': 'chatterbot.logic.BestMatch',
-            'default_response': 'Lo siento, Pero no entiendos.',
+            'default_response': 'Lo siento, pero no te entiendo.',
             'maximum_similarity_threshold': 0.90
         },
         'chatterbot.logic.BestMatch'
         ]
 )
 
-#chatbot.storage.drop()
 
-trainerGreetings = ChatterBotCorpusTrainer(chatbot)
-trainerGreetings.train("chatterbot.corpus.spanish")
+
+#trainerGreetings = ChatterBotCorpusTrainer(chatbot)
+#trainerGreetings.train("chatterbot.corpus.spanish.greetings")
 trainer = ListTrainer(chatbot)
-cleaned_corpus = clean_corpus(CORPUS_FILE)
-trainer.train(cleaned_corpus)
 
-def get_feedback():
+
+trainingData = codecs.open('corpus.txt', 'r', "utf-8").read().splitlines()
+#data = convert_to_ascii(trainingData)
+trainer.train(trainingData)
+
+"""def get_feedback():
 
     text = input()
 
@@ -50,4 +50,4 @@ while True:
     if query in exit_conditions:
         break
     else:
-        print(f"ChatSalud {chatbot.get_response(query)}")
+        print(f"ChatSalud {chatbot.get_response(query)}")"""
