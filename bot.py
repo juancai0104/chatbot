@@ -6,16 +6,16 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 import codecs
 
 chatbot = ChatBot(
-        "Chatpot",
+        "Alicia",
         storage_adapter = 'chatterbot.storage.SQLStorageAdapter',
         database_uri = 'postgresql://postgres:0000@localhost/db_chatbot',
         logic_adapters=[
         {
             'import_path': 'chatterbot.logic.BestMatch',
-            'default_response': 'Lo siento, pero no te entiendo.',
-            'maximum_similarity_threshold': 0.90
+            #'default_response': 'Lo siento, pero no te entiendo.',
+            #'maximum_similarity_threshold': 0.90
         },
-        'chatterbot.logic.BestMatch'
+        #'chatterbot.logic.BestMatch'
         ]
 )
 
@@ -24,13 +24,10 @@ chatbot = ChatBot(
 #trainerGreetings = ChatterBotCorpusTrainer(chatbot)
 #trainerGreetings.train("chatterbot.corpus.spanish.greetings")
 trainer = ListTrainer(chatbot)
+#trainingData = codecs.open('corpus.txt', 'r', "utf-8").read().splitlines()
+#trainer.train(trainingData)
 
-
-trainingData = codecs.open('corpus.txt', 'r', "utf-8").read().splitlines()
-#data = convert_to_ascii(trainingData)
-trainer.train(trainingData)
-
-"""def get_feedback():
+def get_feedback():
 
     text = input()
 
@@ -44,7 +41,7 @@ trainer.train(trainingData)
 
 
 
-exit_conditions = (":q", "quit", "exit")
+"""exit_conditions = (":q", "quit", "exit")
 while True:
     query = input("> ")
     if query in exit_conditions:
