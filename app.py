@@ -1,4 +1,4 @@
-from bot import chatbot
+from bot import chatbot, get_feedback
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -12,6 +12,13 @@ def home():
 def get_bot_response():
     userText = request.args.get('msg')
     return str(chatbot.get_response(userText))
+
+@app.route("/put")
+def get_feedback_response():
+    userText = request.args.get('msg')
+    return str(get_feedback(userText, 'PRUEBA'))
+
+
 
 if __name__ == "__main__":
     app.run()
