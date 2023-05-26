@@ -13,12 +13,9 @@ def get_bot_response():
     userText = request.args.get('msg')
     return str(chatbot.get_response(userText))
 
-@app.route("/put")
-def get_feedback_response():
-    userText = request.args.get('msg')
-    return str(get_feedback(userText, 'PRUEBA'))
-
-
-
 if __name__ == "__main__":
-    app.run()
+    app.run()                             
+
+
+
+

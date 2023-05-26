@@ -1,11 +1,13 @@
 # bot.py
 
+#IMPORTACIÓN
 from chatterbot import ChatBot
 from chatterbot.conversation import Statement
 from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
 import codecs
 
+#INICIALIZACIÓN Y CONFIGURACIÓN DEL BOT
 chatbot = ChatBot(
         "Alicia",
         storage_adapter = 'chatterbot.storage.SQLStorageAdapter',
@@ -21,8 +23,7 @@ chatbot = ChatBot(
         ]
 )
 
-
-
+#ENTRENAMIENTO
 #trainerGreetings = ChatterBotCorpusTrainer(chatbot)
 #trainerGreetings.train("chatterbot.corpus.spanish.greetings")
 #trainer = ListTrainer(chatbot)
@@ -30,12 +31,7 @@ chatbot = ChatBot(
 #trainer.train(trainingData)
 
 
-"""def get_feedback(pregunta, respuestaCorrecta):
-    
-    correct_response = Statement(respuestaCorrecta)
-    chatbot.learn_response(correct_response, pregunta)
-    return "Respuesta añadida a la base de datos de Alicia"""
-
+#MÉTODO PARA DAR RETROALIMENTACIÓN POR MEDIO DE CONVERSACIÓN POR CONSOLA
 def get_feedback():
 
     text = input()
@@ -48,29 +44,8 @@ def get_feedback():
         print('Por favor, escriba "Si" o "No"')
         return get_feedback()
 
-
-
+#INICIALIZACIÓN CHATBOT
 print('Por favor, haz una regunta')
-
-
-
-"""exit_conditions = (":q", "quit", "exit")
-while True:
-    query = input("> ")
-    if query in exit_conditions:
-        break
-    else:
-        print(f"ChatSalud {chatbot.get_response(query)}")
-        print('\n Is "{}" a coherent response to "{}"? \n'.format(
-            chatbot.get_response(query).text,
-            query
-        ))
-        if get_feedback() is False:
-            print('please input the correct one: ')
-            correct_response = text=input()
-            chatbot.learn_response(correct_response, query)
-            print('Responses added to bot!')"""
-
 while True:
     try:
         input_statement = Statement(text=input())
